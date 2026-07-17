@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper</title>
+    <style>
+        /* 清除默认边距，并全局应用思源宋体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            /* 保持相同的背景底图 */
+            background-image: url('assets/images/粉色底图1（波点 星星 淡粉）.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; 
+        }
+
+        /* 信纸素材容器 */
+        .paper-link {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px; /* 保留与下方文字的留白 */
+            cursor: pointer;
+        }
+
+        /* 调整信纸图片的宽度比例以匹配设计图 11.jpg */
+        .paper-link img {
+            width: 85%; 
+            height: auto;
+            display: inline-block;
+        }
+
+        .instruction-text {
+            font-size: 18px;
+            color: #666; 
+            background-color: rgba(245, 245, 245, 0.85); 
+            padding: 8px 20px;
+            border-radius: 20px; 
+            letter-spacing: 1.5px;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px; 
+            bottom: -60px; /* 保持与前一页相同的底部留白 */
+            width: 36px; 
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .back-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+        <a href="letter.html" class="paper-link">
+            <img src="assets/images/信纸素材.jpg" alt="信纸">
+        </a>
+        
+        <div class="instruction-text">
+            -请点击信纸-
+        </div>
+
+        <a href="birthday.html" class="back-btn">
+            <img src="assets/images/抠图版返回键.png" alt="返回">
+        </a>
+    </div>
+
+</body>
+</html>

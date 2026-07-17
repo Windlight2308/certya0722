@@ -1,0 +1,548 @@
+/* =========================================
+   全局重置与字体设定
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 强制沉浸式，禁止出现滚动条 */
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300; /* 思源宋体 - 细体 */
+    background-color: #f8f8f8; /* 防止图片加载前的底色突兀 */
+}
+
+/* =========================================
+   全屏背景与排版系统
+   ========================================= */
+.home-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/images/5.jpg');
+    background-size: cover;
+    background-position: center center; /* 核心：确保背景星轨中心永远位于屏幕正中央 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 网站主标题 */
+.main-title {
+    position: absolute;
+    top: 28%; /* 还原设计稿中高雅的顶部留白 */
+    font-size: 4.2rem;
+    color: #616161; /* 提取设计稿中的文艺灰 */
+    letter-spacing: 0.08em; /* 增加字间距，增强杂志排版呼吸感 */
+    text-align: center;
+    font-weight: 300;
+}
+
+/* =========================================
+   中心互动区（星轨锚定系统）
+   ========================================= */
+/* 创建一个固定尺寸的虚拟画板，确保内部元素的距离比例永不变形 */
+.interactive-center {
+    position: absolute;
+    top: 55%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 旋转的星星图标 */
+.center-icon-wrapper {
+    position: absolute;
+    width: 260px; /* 尺寸严格匹配设计稿中星星的大小 */
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.rotating-icon {
+    width: 100%;
+    height: auto;
+    /* 核心慢动效：25秒完成一次360度匀速旋转，营造电影感 */
+    animation: slowRotate 25s linear infinite; 
+}
+
+@keyframes slowRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* =========================================
+   链接文字与极简交互动效
+   ========================================= */
+.nav-link {
+    position: absolute;
+    text-decoration: none;
+    color: #6f6f6f;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    /* 核心慢动效：极度丝滑的过渡曲线 */
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    padding: 10px;
+}
+
+/* 悬停时的低调微光反应，不破坏极简感 */
+.nav-link:hover {
+    opacity: 1;
+    color: #4a4a4a;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.9); 
+}
+
+/* 严格根据设计图 4.jpg 定位连线两端 */
+.nav-love {
+    bottom: 102px;
+    left: 150px;
+}
+
+.nav-enter {
+    top: 180px;
+    right: 126px;
+}
+/* =========================================
+   Love 信息页面专属样式
+   ========================================= */
+/* 内容垂直居中容器 */
+.info-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 两行专属文字的排版 */
+.info-text {
+    font-size: 2.8rem; /* 根据设计稿比例设定 */
+    color: #616161;
+    letter-spacing: 0.08em;
+    font-weight: 300;
+    margin-bottom: 20px; /* 第一行和第二行之间的留白 */
+    text-align: center;
+}
+
+/* 专门拉开第二行文字与下方返回按钮的距离 */
+.info-text:nth-of-type(2) {
+    margin-bottom: 25px; 
+}
+
+/* 返回按钮的慢节奏交互 */
+.back-link {
+    display: inline-block;
+    opacity: 0.8;
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 悬停时微微发光并恢复不透明度，保持克制 */
+.back-link:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+}
+
+.back-icon {
+    width: 50px; /* 控制返回键的大小，保持精致感 */
+    height: auto;
+}
+
+/* =========================================
+   Enter 主页面专属样式
+   ========================================= */
+/* 专属背景图设定 */
+.enter-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/images/底图2.png');
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+}
+
+/* 稍微放大中心画板，适配五个角的分布 */
+.enter-interactive-center {
+    width: 900px;
+    height: 600px;
+}
+
+/* 每个节点的通用布局属性 */
+.nav-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    /* 增加一个非常缓慢的呼吸悬停反馈，保持克制 */
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-node:hover {
+    transform: scale(1.05); 
+}
+
+/* 圆形图标与图章化效果逻辑 */
+.nav-node img {
+    width: 95px; 
+    height: 95px;
+    border-radius: 50%; 
+    object-fit: cover;
+    
+    /* 【取消外边框】去掉突兀的白色边线 */
+    border: none;
+    
+    /* 【核心：内阴影】让图标看起来像凹陷在背景里 */
+    box-shadow: 
+        inset 0 4px 10px rgba(0, 0, 0, 0.4),  /* 内部上方阴影，表现凹陷厚度 */
+        0 2px 5px rgba(255, 255, 255, 0.2);   /* 外部底部微光，表现纸张边缘 */
+        
+    transition: all 0.6s ease;
+    opacity: 0.9; /* 稍微降低一点透明度，让图标和背景色融合得更自然 */
+}
+
+.nav-node:hover img {
+    /* 悬停时：图标颜色微微加深，就像图章蘸了墨水一样 */
+    box-shadow: 
+        inset 0 6px 15px rgba(0, 0, 0, 0.6), 
+        0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    opacity: 1; /* 变得更清晰，强调选中状态 */
+    transform: translateY(0); /* 保持不动，图章不应跳动 */
+}
+
+/* 紧跟的英文单词排版 */
+.node-label {
+    font-size: 1.25rem;
+    color: #616161;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+}
+
+/* 文字在上方时的间距 */
+.label-top {
+    margin-bottom: 15px; 
+}
+
+/* 文字在下方时的间距 (Birthday 专属) */
+.label-bottom {
+    margin-top: 15px;
+}
+
+/* -----------------------------------------
+   五角星图标坐标绝对定位 (根据 7.jpg 星轨相对位置还原)
+   ----------------------------------------- */
+.node-picture {
+    top: 5px;
+    left: 235px;
+}
+
+.node-fiction {
+    top: -90px;
+    left: 580px;
+}
+
+.node-memory {
+    top: 180px;
+    right: 110px;
+}
+
+.node-birthday {
+    bottom: 158px;
+    left: 190px;
+}
+
+.node-music {
+    bottom: 80px;
+    right: 310px;
+}
+/* 主页面右下角返回键 */
+.main-back-link {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    opacity: 0.8;
+    transition: all 0.6s ease;
+    z-index: 100;
+}
+.main-back-link:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.main-back-icon {
+    width: 45px;
+    height: auto;
+}
+
+/* =========================================
+   Fiction 页面专属样式 (严格对齐设计稿 1_2.jpg)
+   ========================================= */
+.fiction-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/images/3.jpg');
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 1. 满足需求一：纯粹的小背景层，不带任何CSS透明度干扰 */
+.purple-overlay {
+    position: relative;
+    width: 1200px;        /* 【需求四】整体放大：从 1050px 放大至 1200px */
+    height: 705px;       /* 【需求四】整体放大：从 620px 放大至 705px */
+    background-image: url('../assets/images/淡紫色半透明层.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+  
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px 25px 20px;
+    
+    /* 【需求二】彻底解除裁剪，允许大卡牌在 3D 空间完美溢出和呈现 */
+    overflow: visible !important; 
+}
+
+/* 3D 舞台容器 */
+.tarot-carousel {
+    position: relative;
+    width: 100%;
+    height: 540px;       /* 增加舞台高度，确保卡牌上下有充足空间 */
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px; /* 匹配放大后的景深 */
+    overflow: visible !important;
+}
+
+/* 2. 满足需求二 & 四：塔罗牌整体等比例放大，且去除裁剪 */
+.tarot-card {
+    position: absolute;
+    width: 195px;        /* 【需求四】卡牌放大：从 155px 放大至 195px */
+    height: 312px;       /* 【需求四】卡牌放大：从 250px 放大至 312px (严格比例) */
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.8s;
+    transform-style: preserve-3d;
+}
+
+.tarot-card img {
+    width: 111%;
+    height: 120%;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================
+   3. 满足需求三：全员 100% 透明度 + 优雅的圆弧叠放层级
+   ========================================= */
+
+/* 居中主牌 a (如：世界) */
+.tarot-card.card-center {
+    transform: translate3d(0, -25px, 180px) scale(1);
+    z-index: 100;
+    opacity: 1 !important; /* 【需求三】严格 100% 不透明 */
+    pointer-events: auto;
+}
+
+/* 左右第一层侧牌 b 和 c - 紧密环绕，无缝叠放 */
+.tarot-card.card-left-1 {
+    transform: translate3d(-145px, 5px, 90px) scale(0.86) rotateY(18deg);
+    z-index: 80;
+    opacity: 1 !important; /* 【需求三】严格 100% 不透明 */
+    pointer-events: auto;
+}
+.tarot-card.card-right-1 {
+    transform: translate3d(145px, 5px, 90px) scale(0.86) rotateY(-18deg);
+    z-index: 80;
+    opacity: 1 !important; /* 【需求三】严格 100% 不透明 */
+    pointer-events: auto;
+}
+
+/* 左右第二层侧牌 d 和 e - 顺应星轨自然下垂，完整显现 */
+.tarot-card.card-left-2 {
+    transform: translate3d(-285px, 35px, 10px) scale(0.74) rotateY(32deg);
+    z-index: 60;
+    opacity: 1 !important; /* 【需求三】严格 100% 不透明 */
+    pointer-events: none;
+}
+.tarot-card.card-right-2 {
+    transform: translate3d(285px, 35px, 10px) scale(0.74) rotateY(-32deg);
+    z-index: 60;
+    opacity: 1 !important; /* 【需求三】严格 100% 不透明 */
+    pointer-events: none;
+}
+
+/* 循环回环时，沉入大后方的不可见卡牌 */
+.tarot-card.card-hidden {
+    transform: translate3d(0, 80px, -200px) scale(0.5);
+    z-index: 10;
+    opacity: 0; /* 仅后方准备轮换的闭环卡牌隐形 */
+    pointer-events: none;
+}
+
+/* 提示文字（胶囊背景块保持原样） */
+.tarot-instruction {
+    font-size: 1.1rem;
+    color: #333333;
+    background-color: rgba(245, 245, 245, 0.75);
+    padding: 8px 32px;
+    border-radius: 25px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    margin-bottom: 5px;
+    z-index: 10;
+}
+
+/* 左下角返回键位置微调，完美契合放大后的边缘 */
+.purple-back-link {
+    position: absolute;
+    bottom: 25px;
+    left: 35px;
+    opacity: 0.8;
+    transition: all 0.6s ease;
+    z-index: 110;
+}
+.purple-back-link:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.purple-back-icon {
+    width: 40px;
+    height: auto;
+}
+/* =========================================
+   塔罗牌小说阅读页 - 极致排版系统
+   ========================================= */
+
+/* 大背景：占满整个屏幕，禁止外层滚动 */
+.article-page-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/images/3.jpg');
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 棕色方块（小背景） */
+.brown-content-box {
+    position: relative;
+    /* 核心精算：每行24字符(24em) + 左右内边距各80px = 容器总宽。字体变大，宽度自动变大 */
+    width: calc(30em + 80px); 
+    /* 高度随之变大，保持视觉比例协调 */
+    height: 700px; 
+    
+    background-color: #f1e8df; /* 若使用图片则为 background-image: url('../assets/images/棕色大方块.png'); */
+    background-size: 100% 100%;
+    
+    /* 四个角圆角设计 */
+    border-radius: 16px; 
+    
+    /* 四条边都向外荧光式的灰色阴影效果 */
+    box-shadow: 0 0 35px rgba(128, 128, 128, 0.8); 
+    
+    /* 四周绝对等边距留白（与宽度计算配合） */
+    padding: 40px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 右上角绝对定位的黑色叉号 */
+.close-btn-link {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 100;
+}
+
+.close-btn {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 独立滚动文本包裹层 */
+.article-text-wrapper {
+    flex: 1;
+    width: 30em; /* 严格限制宽度为24个中文字符 */
+    overflow-y: auto; /* 允许上下滑动浏览更多文字 */
+    overflow-x: hidden;
+    
+    /* 隐藏默认的滚动条以防挤压24字符的宽度，保持界面极简干净 */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.article-text-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* 文本排版格式化 */
+.article-text-content {
+    color: #000000; 
+    text-align: justify; /* 文本两端对齐 */
+    text-justify: inter-ideograph;
+    word-break: break-all;
+}
+
+/* 标题样式 */
+.article-text-content h1 {
+    font-size: 1.8em;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* 正文段落样式（除标题外字体大小严格相同） */
+.article-text-content p {
+    font-size: 20px;      /* 【已变大】基础阅读字号 */
+    line-height: 1.5;     /* 【保持】行距1.5倍 */
+    text-indent: 2em;     /* 每一段前空两字符 */
+    margin-top: 0;
+    margin-bottom: 0.5em; /* 【已缩小】段落之间的间距不用太大 */
+}
+
+/* 序号段落专用样式（如：一、二、三） */
+.article-text-content p.section-title {
+    text-align: center;
+    text-indent: 0;
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}

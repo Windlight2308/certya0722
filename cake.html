@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Folder - Script</title>
+    <style>
+        /* 全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 居中的小背景（纯色长方形） */
+        .content-box {
+            position: relative;
+            
+            /* 核心精算：每行36个中文字符(36em) + 左右内边距各80px(共160px) = 容器总宽 */
+            width: calc(48em + 80px); 
+            height: 520px; /* 固定高度，保持长方形比例 */
+            
+            background-color: #ffffff; 
+            
+            /* 右边和下边的下拉式阴影 */
+            box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.1);
+            
+            /* 四周绝对等距留白 */
+            padding: 40px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部居中的文件夹图标 (大小与memory页面的170px保持一致) */
+        .folder-icon {
+            position: absolute;
+            top: -105px; /* 向上偏移使其一半在内一半在外 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            z-index: 10;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 48em; /* 严格限制36字符宽度 */
+            overflow-y: auto; /* 超出范围可上下滑动 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 文本排版格式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify; /* 两端对齐 */
+            text-justify: inter-ideograph;
+        }
+
+        /* 标题样式：字号28 */
+        .article-text-content h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400; /* 标题可稍微加重以作区分，但维持整体细体感 */
+        }
+
+        /* 居中无需缩进的副标题/标注信息 */
+        .article-text-content .center-text {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        /* 正文样式：字号20 */
+        .article-text-content p {
+            font-size: 20px;
+            line-height: 1.5; /* 1.5倍行距 */
+            text-indent: 2em; /* 每一段前空两字符 */
+            margin-bottom: 0.8em; /* 段落间距 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        
+        <!-- 上半边在外的文件夹图标 -->
+        <img src="assets/images/蛋糕文件夹.png" alt="蛋糕文件夹" class="folder-icon">
+        
+        <!-- 内部右上角的黑色叉，点击返回 memory.html -->
+        <a href="memory.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <!-- 限制范围并支持滚动的文本区 -->
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>我欲邀卿常漫舞</h1>
+                <h1>青丝白发老人间</h1>
+                <p>致晴：</p>
+                <p>见信安！</p>
+                <p>我总觉得会写错信的格式，意思一下算了。仔细一想要写满信纸要用好久，啊，我对你真是用情至深！总之现在是12月3日中午12点，阳光透骨风。</p>
+                <p>我大概会用好几天来完成这封信，所以可能会意识流，我尽量控制。</p>
+                <p>本来想历数我们的感情历程，后来发现停留在记忆里的大多是各样情绪的踪迹，欢喜、遗憾，我其实很害怕它们都变成概念。故而，我尽己所能去想念，然后，收藏好我们仍能相伴的日子。</p>
+                <p>哎呀，溢美之词到嘴边就难以说出，所以付诸于笔下。我真的是个很期待能收到所付出的回报的人，晴你是唯一一个让我这样安心，这样能无所谓的付出的人啊。这份无可替代的保质期大概是80年？可能更久吧。这样一个人（具有高尚的道德情操与高雅的艺术情绪）居然花落我家，真是做梦都会笑醒。</p>
+                <p>晴，其实我一直都非常佩服你呀，能拯救（我一直这样认为）初二那个自卑又敏感的我，能那样确信自己所热爱的。啊，我姑且把我的编剧梦想寄托给你吧，你要替我扬名万里，成为业界的传说喔！还有，你身上总是有种特殊的韧劲以及一些真的能紧握不放的执念，故而我总会想如果我有老婆一半的锲而不舍，现在肯定已经做成了好多事情了吧。你的三部曲简直让我尚在襁褓的烟草愧疚到死啊QAQ</p>
+                <p>青春真是个浮光掠影的时期啊，我们明明只认识了四年而已，很多值得认真记住的事情就已经发生，已经遗憾的变成了概念。活在当下是个烂大街但确实非它不可的词语，我无比庆幸到这个有你的石门，无比庆幸我们还有至少两年半的当下可相伴。</p>
+                <p>现在是在校的晚上，我在教室快被暖气烘出高反。遗憾的是给你买的礼物到底没有寄到，那个礼盒里也该死的少了一串风铃。我在送出这封信的时候，肯定很心虚。我现在总算体会到了何为夜凉如水，但其实我很享受揣着寒风给你写信的过程，风都揣热了。很奇怪，你诞生于寒冬，又那么爱夏天。</p>
+                <p>企鹅和北极熊来自最冰冷的地方，终于也会跨越地球相逢。</p>
+                <p>于是我们在凛冽中拥抱，在这个难以描摹的十六岁。</p>
+                <p>记得你写给袁阿柚的信，夏央是许稚的。</p>
+                <p>DYQ是YMX的。</p>
+                <p>生日快乐，邓允晴。</p>
+                <p>稚</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

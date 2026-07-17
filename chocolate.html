@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Folder - Script</title>
+    <style>
+        /* 全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 居中的小背景（纯色长方形） */
+        .content-box {
+            position: relative;
+            
+            /* 核心精算：每行36个中文字符(36em) + 左右内边距各80px(共160px) = 容器总宽 */
+            width: calc(48em + 80px); 
+            height: 520px; /* 固定高度，保持长方形比例 */
+            
+            background-color: #ffffff; 
+            
+            /* 右边和下边的下拉式阴影 */
+            box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.1);
+            
+            /* 四周绝对等距留白 */
+            padding: 40px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部居中的文件夹图标 (大小与memory页面的170px保持一致) */
+        .folder-icon {
+            position: absolute;
+            top: -105px; /* 向上偏移使其一半在内一半在外 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            z-index: 10;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 48em; /* 严格限制36字符宽度 */
+            overflow-y: auto; /* 超出范围可上下滑动 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 文本排版格式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify; /* 两端对齐 */
+            text-justify: inter-ideograph;
+        }
+
+        /* 标题样式：字号28 */
+        .article-text-content h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400; /* 标题可稍微加重以作区分，但维持整体细体感 */
+        }
+
+        /* 居中无需缩进的副标题/标注信息 */
+        .article-text-content .center-text {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        /* 正文样式：字号20 */
+        .article-text-content p {
+            font-size: 20px;
+            line-height: 1.5; /* 1.5倍行距 */
+            text-indent: 2em; /* 每一段前空两字符 */
+            margin-bottom: 0.8em; /* 段落间距 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        
+        <!-- 上半边在外的文件夹图标 -->
+        <img src="assets/images/巧克力文件夹.png" alt="巧克力文件夹" class="folder-icon">
+        
+        <!-- 内部右上角的黑色叉，点击返回 memory.html -->
+        <a href="memory.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <!-- 限制范围并支持滚动的文本区 -->
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>庸才梦</h1>
+                <p>我还在上小学的时候就学会剽窃他人漫画内容来扩充自己的小说。</p>
+                <p>先是写在本子上，后来学会打字之后便保存在电脑里。</p>
+                <p>上了初中，十二、三岁的样子，我受乡土文学的浸淫，认识了朱自清、余秋雨等一干人物，于是我把他们文章中的优美句子缝到自己的作文里，并大受好评。</p>
+                <p>我不被批斗的诀窍是通篇保持优美的风格，我的作文是三年来全集唯一得过五十分满分的神话。居然有老师来请教我，那大概是“很硬的山风、很软的河水”之类的表达。那是我人生中为数不多抉择的时刻，只消撒一个小谎我便坐实“天才”的名号，但我最后还是告诉她：这是摘抄来的。</p>
+                <p>听说那位老师后来她的班上大搞摘抄，这是后话。初中快毕业的时候，我的老师赞誉我为“小张爱玲”，可笑我当时连张爱玲一点文字也没有读过，直到后来认识到那是怎样一位天才，才感慨自己年少无知时对她进行过可怕的亵渎。</p>
+                <p>然后到了我十六、七岁，彼时我已脱掉作文大神的标签，成为再普通不过的文学少女。我还在写小说，莫名其妙会融很多梗，并且致力于模仿张爱玲。她17岁时写“天才梦”，我如今写“庸才梦”，老天只给我抄写与模仿的天赋，我也只好这么用。我年轻气盛的时候，喜欢揭露社会的假恶丑，写一些与实际生活全不相干的痛苦，几乎不与男性交流，却写一个女人如何被强奸。世界在我看来是一个巨大的火盆，每个人在里面跳脚，拼尽全力也跳不出去。我不知道自己的悲观从何而来，或许成为名作家的天才梦破碎之后我就变得愤世嫉俗。</p>
+                <p>我对张爱玲的追逐到现在也没有完，她在“天才梦”的结尾写“生命是一袭华美的袍，上面爬满了虱子”，一鸣惊人。为了给我这篇抄袭的烂作一个精彩的结尾，请让我对她进行又一次的模仿。</p>
+                <p>生命是一只巨大的虱子，偶尔穿着华美的袍。</p>
+           </div>
+        </div>
+    </div>
+
+</body>
+</html>

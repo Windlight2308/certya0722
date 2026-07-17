@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Folder - Script</title>
+    <style>
+        /* 全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 居中的小背景（纯色长方形） */
+        .content-box {
+            position: relative;
+            
+            /* 核心精算：每行36个中文字符(36em) + 左右内边距各80px(共160px) = 容器总宽 */
+            width: calc(48em + 80px); 
+            height: 520px; /* 固定高度，保持长方形比例 */
+            
+            background-color: #ffffff; 
+            
+            /* 右边和下边的下拉式阴影 */
+            box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.1);
+            
+            /* 四周绝对等距留白 */
+            padding: 40px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部居中的文件夹图标 (大小与memory页面的170px保持一致) */
+        .folder-icon {
+            position: absolute;
+            top: -105px; /* 向上偏移使其一半在内一半在外 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            z-index: 10;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 48em; /* 严格限制36字符宽度 */
+            overflow-y: auto; /* 超出范围可上下滑动 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 文本排版格式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify; /* 两端对齐 */
+            text-justify: inter-ideograph;
+        }
+
+        /* 标题样式：字号28 */
+        .article-text-content h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400; /* 标题可稍微加重以作区分，但维持整体细体感 */
+        }
+
+        /* 居中无需缩进的副标题/标注信息 */
+        .article-text-content .center-text {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        /* 正文样式：字号20 */
+        .article-text-content p {
+            font-size: 20px;
+            line-height: 1.5; /* 1.5倍行距 */
+            text-indent: 2em; /* 每一段前空两字符 */
+            margin-bottom: 0.8em; /* 段落间距 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        
+        <!-- 上半边在外的文件夹图标 -->
+        <img src="assets/images/柠檬文件夹.png" alt="柠檬文件夹" class="folder-icon">
+        
+        <!-- 内部右上角的黑色叉，点击返回 memory.html -->
+        <a href="memory.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <!-- 限制范围并支持滚动的文本区 -->
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>致晴（七夕版）</h1>
+                <p>去青岛的飞机上真的很无聊，处在云平线这种不尴不尬的位置，太阳特别大。</p>
+                <p>很多年前（啊其实也才三年）的情人节你发了雨打梨花给我，今年的七夕，我想把它变得有意义一点，遂致信一封。</p>
+                <p>时间是个好恐怖的东西，我终于到了很多故事开场的年龄，然后遗憾地擦肩而过了。没有超级英雄，没有生存挑战，包括校园里甚至凑不齐一个F4，我发现，接受自己的平庸其实是一件很无奈的事。在床上刷手机的时候会莫名的心绞痛，啊，为什么没有特异功能呢？</p>
+                <p>总是会有这些想法。</p>
+                <p>你的微电影什么时候给我看看呢，浪漫的双女主啊，有种夜鹿的《言って》的感觉。我想自己不能再堕落下去了，但是暑假已经结束啦（哭）有一个很粗糙的构思，勉勉强强当做七タ礼物吧。</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

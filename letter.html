@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter</title>
+    <style>
+        /* 全局字体：思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* 使用 font-weight: 300 或 200 确保是细体效果 */
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图1（波点 星星 淡粉）.JPG');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 棕色方块容器：精准居中与等边距 */
+        .brown-content-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            /* 计算：24个字宽(24em) + 左右内边距(60px * 2) */
+            width: calc(30em + 80px); 
+            height: 680px; 
+            
+            background-color: #f1e8df; 
+            border-radius: 16px; 
+            box-shadow: 0 0 35px rgba(128, 128, 128, 0.8); 
+            
+            padding: 40px; /* 四周绝对等距留白 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 30em; /* 严格24字符宽度 */
+            overflow-y: auto; 
+            scrollbar-width: none; 
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 正文样式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+
+        .article-text-content h1 {
+            font-size: 28px; /* 标题稍大 */
+            text-align: center;
+            margin-bottom: 35px;
+            font-weight: 400; /* 标题权重略高 */
+            letter-spacing: 2px;
+        }
+
+        .article-text-content p {
+            font-size: 20px;    /* 正文放大至18px */
+            line-height: 1.5;   /* 1.5倍行距 */
+            text-indent: 2em;   /* 段首缩进两字符 */
+            margin-bottom: 1.5em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brown-content-box">
+        <a href="paper.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>致亲爱的袁敏熙</h1>              
+                <p>老婆，19岁生日快乐！</p>           
+                <p>我的设想是你在最后才点开【Birthday页面】，才看见这封信。如果看到这里时你并未按照我的预期，请你暂时退出这个页面嘿嘿！拜拜～</p>
+                <p>不知道你记不记得我初中三年，每个学年结束就会给自己做一本作文集，整理这一年写下的所有作文，然后找广告公司漂漂亮亮地打印出来。我在当时就曾想过，有朝一日，我要给袁敏熙也做一本作品集。那些写得真的很好，值得反复看的文字，应该要有一个妥善安放的地方。</p>           
+                <p>因此这个简易的小网站诞生之初，我赋予它的使命只有【Fiction页面】中收藏的八篇你写的小说。不知道你看不看得出有几张塔罗牌上人物的服饰是你穿过的衣服？哈哈哈哈看不出也很正常！但是我是一个注重细节的人嘿嘿～里面《夏》《过冬》是你写给我的生日礼物，剩下的则是你曾给我分享的你的小创作。遗憾我暂时没有更强的功力，可以像更大型的阅读网站一样储存你的所有作品，只要在搜索引擎上输入关键字就能弹出！与AI聊天真的很不容易，还是人脑更聪明TT</p>
+                <p>【Memory页面】选取了我们共同写的或者你写给我的碎片化的文字。偷偷告诉你，有些本身你是手写给我的，我偷懒选择了语音输入的方式转为文字。用非常标准的普通话读出来你写给我的充满爱意的文字，我真的感到非常不好意思，也非常非常感动。我会把很多“一手史料”整理保管得很好，但我其实从前很少回看。借助这一次的机会，让我重新回看你写给我的小纸条、生日信等等，让我感受到，原来你在每个时期都给予了我那样那样多宝贵的爱与肯定，真的是我的幸运。我们都是擅长表达情感的人，真好啊！我还有一个神奇的小发现，其实我们俩很多遣词造句真的有互相影响，当我将你的文字读出来，我有时候会有强烈的熟悉感，就像自己写出来的一样。做论文研究可以做“试论YMX和DYQ语言的互渗现象”（）这让我感觉到，我们有许多记忆是共享的，我们人格和灵魂的底色有相当一部分是相同的，人与人之间的纠缠原来真的会改变命运，太神奇了。</p>           
+                <p>【Music页面】的选曲其实很不典型。我本来想按照歌曲语言、风格来划分，后来想了一下还是按照歌曲封面的颜色来分类。大部分歌曲是你跟我分享过的，应该都是你比较熟悉的旋律吧？真的很好听。</p>
+                <p>我们俩的合照太多了，我保存的你的单人照倒是比较少。你比较少发朋友圈，有时候发了很快又过了三天可见的期限。神秘的袁敏熙呀！想了解袁敏熙的人可以来看我的朋友圈！</p>           
+                <p>总而言之，希望你喜欢这个小礼物。Only for Yuan Minxi，哎呀，读着读着怎么有一语双关的感觉？我发现，你总是能让我进步。其实比起你来说，我写文章真的慢很多，但是抱着“我要写给袁敏熙”的心，我写了15万字的小说；想要让我们的韩国之旅留下斑斓的色彩，我做了一本zine；想要让你前十八年一些或许你都来不及收藏的东西有一个归宿，我制作了这个网站。其实不仅仅是因为想到“这个世界上还会有一个读者、一个观众、一个使用者”，而是想到这一个读者、一个观众、一个使用者——是你，所以我可以坚持下来，让每一个创意最终都能划上一个相对圆满的句号。</p>
+                <p>最后的最后，再次祝愿你生日快乐，度过美好的一天，然后是美好的一年、美好的青春、美好的一辈子。</p>
+                <p>Your Wife，</p>           
+                <p>晴</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

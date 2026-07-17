@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <style>
+        /* 清除默认边距，全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式背景配置 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 主容器：包含网格与底部的文字/返回键 */
+        .memory-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 核心：文件夹网格布局 */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 170px); /* 3列，每列宽170px保证相同大小 */
+            column-gap: 50px; /* 左右列间距 */
+            row-gap: 40px;    /* 上下行间距 */
+            margin-bottom: 45px; /* 与底部文字的留白，精准还原设计图 */
+        }
+
+        /* 文件夹独立链接块 */
+        .folder-item {
+            display: block;
+            width: 100%;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        /* 悬停微动效增加点击感 (可按需保留) */
+        .folder-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* 文件夹图片样式，保证非透明像素完美对齐 */
+        .folder-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* 提示文字及其背景样式 (与birthday.html保持一致) */
+        .instruction-text {
+            font-size: 18px;
+            color: #7b7b7b; 
+            background-color: rgba(245, 245, 245, 0.85); 
+            padding: 8px 24px;
+            border-radius: 20px; 
+            letter-spacing: 1px;
+        }
+
+        /* 返回键样式，相对主容器定位至柠檬文件夹左下角 */
+        .back-btn {
+            position: absolute;
+            left: 20px; /* 视觉上对齐柠檬文件夹的左下角下方 */
+            bottom: 2px; /* 视觉上与中间的文字处于同一水平线 */
+            width: 36px; 
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .back-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="memory-container">
+        
+        <!-- 2x3 网格区域 -->
+        <div class="folder-grid">
+            <!-- 第一行 -->
+            <a href="mint.html" class="folder-item">
+                <img src="assets/images/薄荷文件夹.png" alt="薄荷文件夹">
+            </a>
+            <a href="ice cream.html" class="folder-item">
+                <img src="assets/images/雪糕文件夹.png" alt="雪糕文件夹">
+            </a>
+            <a href="cake.html" class="folder-item">
+                <img src="assets/images/蛋糕文件夹.png" alt="蛋糕文件夹">
+            </a>
+            
+            <!-- 第二行 -->
+            <a href="lemon.html" class="folder-item">
+                <img src="assets/images/柠檬文件夹.png" alt="柠檬文件夹">
+            </a>
+            <a href="chocolate.html" class="folder-item">
+                <img src="assets/images/巧克力文件夹.png" alt="巧克力文件夹">
+            </a>
+            <a href="butter.html" class="folder-item">
+                <img src="assets/images/奶酪文件夹.png" alt="奶酪文件夹">
+            </a>
+        </div>
+
+        <!-- 底部文字 -->
+        <div class="instruction-text">
+            -请选择任意一个文件夹-
+        </div>
+
+        <!-- 左下角返回键 (点击返回 enter.html) -->
+        <a href="enter.html" class="back-btn">
+            <img src="assets/images/抠图版返回键.png" alt="返回">
+        </a>
+        
+    </div>
+
+</body>
+</html>

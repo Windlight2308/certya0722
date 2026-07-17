@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Folder - Script</title>
+    <style>
+        /* 全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 居中的小背景（纯色长方形） */
+        .content-box {
+            position: relative;
+            
+            /* 核心精算：每行36个中文字符(36em) + 左右内边距各80px(共160px) = 容器总宽 */
+            width: calc(48em + 80px); 
+            height: 520px; /* 固定高度，保持长方形比例 */
+            
+            background-color: #ffffff; 
+            
+            /* 右边和下边的下拉式阴影 */
+            box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.1);
+            
+            /* 四周绝对等距留白 */
+            padding: 40px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部居中的文件夹图标 (大小与memory页面的170px保持一致) */
+        .folder-icon {
+            position: absolute;
+            top: -105px; /* 向上偏移使其一半在内一半在外 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            z-index: 10;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 48em; /* 严格限制36字符宽度 */
+            overflow-y: auto; /* 超出范围可上下滑动 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 文本排版格式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify; /* 两端对齐 */
+            text-justify: inter-ideograph;
+        }
+
+        /* 标题样式：字号28 */
+        .article-text-content h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400; /* 标题可稍微加重以作区分，但维持整体细体感 */
+        }
+
+        /* 居中无需缩进的副标题/标注信息 */
+        .article-text-content .center-text {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        /* 正文样式：字号20 */
+        .article-text-content p {
+            font-size: 20px;
+            line-height: 1.5; /* 1.5倍行距 */
+            text-indent: 2em; /* 每一段前空两字符 */
+            margin-bottom: 0.8em; /* 段落间距 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        
+        <!-- 上半边在外的文件夹图标 -->
+        <img src="assets/images/薄荷文件夹.png" alt="薄荷文件夹" class="folder-icon">
+        
+        <!-- 内部右上角的黑色叉，点击返回 memory.html -->
+        <a href="memory.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <!-- 限制范围并支持滚动的文本区 -->
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>-我们的剧本-</h1>
+                <p class="center-text">企鹅袁敏熙 & 北极熊邓允晴</p>
+                <p>（ London, UK ）</p>
+                <p>It's a clear day today.</p>
+                <p>Penguin: Excuse me, I am a penguin from the South Pole and I want to take a trip to the Arctic Pole. I got lost. Could you tell me how I can get there?</p>
+                <p>Polar bear: Nice to meet you, sir! I am from the Arctic Pole and this is London! The Arctic Pole is very far from here. I think you can buy a guidebook about it first.</p>
+                <p>Penguin: Great! Could you tell me where is the nearest bookshop?</p>
+                <p>Polar bear: Certainly. Go straight down the Bristol Road and turn left at the first crossing. Then go two blocks along the street. There is a big bookshop on the right corner of the third block.</p>
+                <p>Penguin: Thanks a lot.</p>
+                <p>( half an hour later )</p>
+                <p>Penguin: Now I get a guidebook. Would you like to travel to the Arctic Pole with me?</p>
+                <p>Polar bear: Sorry, I want to travel to the South Pole.</p>
+                <p>Penguin: Oh, you had better buy some warm clothes.</p>
+                <p>Polar bear: What a good idea! But where is the shopping centre?</p>
+                <p>Penguin: Don't you know?</p>
+                <p>Polar bear: I am not from around here.</p>
+                <p>Penguin: Let's ask the policeman over there!</p>
+                <p>-The End-</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music - 沉浸式音乐</title>
+    <style>
+        /* 基础清除与全屏设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 禁止页面滚动，实现全屏沉浸 */
+            /* 全局统一使用思源宋体 */
+            font-family: "Noto Serif SC", "Source Han Serif SC", "思源宋体", serif;
+        }
+
+        /* 背景底图 */
+        .music-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('assets/images/粉色底图7（波点、花、朦胧）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* 绝对居中定位通用类 */
+        .absolute-center {
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ---------------- 中心耳机素材 ---------------- */
+        .center-earphone {
+            top: 45%;
+            left: 50%;
+            width: 32%; /* 控制主体宽度，留白 */
+            max-width: 450px;
+            min-width: 250px;
+            z-index: 5;
+        }
+        .center-earphone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------------- 耳机仓素材通用设置 ---------------- */
+        .pod-item {
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .pod-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        /* 悬浮交互动效 */
+        .pod-item:hover {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        /* 
+           六个耳机仓的具体对称坐标定位与独立大小控制
+           说明：你可以单独修改这里的 width 百分比来微调它们各自的大小 
+           坐标已经整体向中心（top: 45%, left: 50%）聚拢
+        */
+        
+        /* 上方对称 */
+        .pod-pink   { top: 24%; left: 35%; width: 16%; }
+        .pod-purple { top: 24%; left: 65%; width: 17%; }
+        
+        /* 左右两侧对称 */
+        .pod-yellow { top: 50%; left: 23%; width: 18%; }
+        .pod-orange { top: 47%; left: 75%; width: 15%; }
+        
+        /* 下方对称 */
+        .pod-green  { top: 72%; left: 34%; width: 16%; }
+        /* 蓝色耳机仓特别调大了 width，你可以根据视觉效果再加减 */
+        .pod-blue   { top: 74%; left: 61%; width: 20%; } 
+
+        /* ---------------- 底部 UI 元素 ---------------- */
+        
+        /* 返回键 */
+        .back-btn {
+            top: 65%; /* 位于耳机正下方，文字正上方 */
+            left: 50%;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            z-index: 15;
+            transition: opacity 0.2s ease;
+        }
+        .back-btn:hover {
+            opacity: 0.7;
+        }
+        .back-btn img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 提示文字 */
+        .hint-text {
+            top: 78%;
+            left: 50%;
+            background-color: rgba(245, 245, 245, 0.85);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: #666;
+            font-size: 18px;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+            z-index: 15;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            user-select: none;
+        }
+
+        /* ---------------- 响应式适配 (移动端) ---------------- */
+        @media (max-width: 768px) {
+            .center-earphone { width: 55%; top: 42%; }
+            .pod-pink   { top: 22%; left: 28%; width: 24%; }
+            .pod-purple { top: 22%; left: 72%; width: 24%; }
+            .pod-yellow { top: 45%; left: 18%; width: 24%; }
+            .pod-orange { top: 45%; left: 82%; width: 24%; }
+            .pod-green  { top: 68%; left: 30%; width: 24%; }
+            .pod-blue   { top: 68%; left: 70%; width: 28%; } /* 移动端蓝色同样放大 */
+            .back-btn { top: 60%; width: 36px; height: 36px; }
+            .hint-text { top: 75%; font-size: 12px; padding: 6px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-container">
+        
+        <!-- 中央有线耳机 -->
+        <div class="center-earphone absolute-center">
+            <img src="assets/images/透明有线耳机.png" alt="透明有线耳机">
+        </div>
+
+        <!-- 六个环绕耳机仓 -->
+        <a href="pink-pod.html" class="pod-item pod-pink absolute-center">
+            <img src="assets/images/粉色耳机仓.png" alt="粉色耳机仓">
+        </a>
+        <a href="purple-pod.html" class="pod-item pod-purple absolute-center">
+            <img src="assets/images/紫色耳机仓.png" alt="紫色耳机仓">
+        </a>
+        <a href="yellow-pod.html" class="pod-item pod-yellow absolute-center">
+            <img src="assets/images/黄色耳机仓.png" alt="黄色耳机仓">
+        </a>
+        <a href="orange-pod.html" class="pod-item pod-orange absolute-center">
+            <img src="assets/images/橙色耳机仓.png" alt="橙色耳机仓">
+        </a>
+        <a href="green-pod.html" class="pod-item pod-green absolute-center">
+            <img src="assets/images/绿色耳机仓.png" alt="绿色耳机仓">
+        </a>
+        <a href="blue-pod.html" class="pod-item pod-blue absolute-center">
+            <img src="assets/images/蓝色耳机仓.png" alt="蓝色耳机仓">
+        </a>
+
+        <!-- UI元素：返回键 (准确指向 主页面.html) -->
+        <a href="enter.html" class="back-btn absolute-center">
+            <img src="assets/images/抠图版返回键.png" alt="返回主页">
+        </a>
+
+        <!-- UI元素：提示文字 -->
+        <div class="hint-text absolute-center">
+            -请点击任意一款耳机仓-
+        </div>
+
+    </div>
+
+</body>
+</html>

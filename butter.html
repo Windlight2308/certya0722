@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Folder - Script</title>
+    <style>
+        /* 全局应用思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图5（布纹格子）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 居中的小背景（纯色长方形） */
+        .content-box {
+            position: relative;
+            
+            /* 核心精算：每行36个中文字符(36em) + 左右内边距各80px(共160px) = 容器总宽 */
+            width: calc(48em + 80px); 
+            height: 520px; /* 固定高度，保持长方形比例 */
+            
+            background-color: #ffffff; 
+            
+            /* 右边和下边的下拉式阴影 */
+            box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.1);
+            
+            /* 四周绝对等距留白 */
+            padding: 40px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部居中的文件夹图标 (大小与memory页面的170px保持一致) */
+        .folder-icon {
+            position: absolute;
+            top: -105px; /* 向上偏移使其一半在内一半在外 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            z-index: 10;
+        }
+
+        /* 右上角返回按钮 */
+        .close-btn-link {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        .close-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 文本滚动容器 */
+        .article-text-wrapper {
+            flex: 1;
+            width: 48em; /* 严格限制36字符宽度 */
+            overflow-y: auto; /* 超出范围可上下滑动 */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .article-text-wrapper::-webkit-scrollbar { display: none; }
+
+        /* 文本排版格式 */
+        .article-text-content {
+            color: #000000;
+            text-align: justify; /* 两端对齐 */
+            text-justify: inter-ideograph;
+        }
+
+        /* 标题样式：字号28 */
+        .article-text-content h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400; /* 标题可稍微加重以作区分，但维持整体细体感 */
+        }
+
+        /* 居中无需缩进的副标题/标注信息 */
+        .article-text-content .center-text {
+            text-align: center;
+            text-indent: 0;
+        }
+
+        /* 正文样式：字号20 */
+        .article-text-content p {
+            font-size: 20px;
+            line-height: 1.5; /* 1.5倍行距 */
+            text-indent: 2em; /* 每一段前空两字符 */
+            margin-bottom: 0.8em; /* 段落间距 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        
+        <!-- 上半边在外的文件夹图标 -->
+        <img src="assets/images/奶酪文件夹.png" alt="奶酪文件夹" class="folder-icon">
+        
+        <!-- 内部右上角的黑色叉，点击返回 memory.html -->
+        <a href="memory.html" class="close-btn-link">
+            <img src="assets/images/黑色叉.png" alt="关闭" class="close-btn">
+        </a>
+
+        <!-- 限制范围并支持滚动的文本区 -->
+        <div class="article-text-wrapper">
+            <div class="article-text-content">
+                <h1>卿卿如晤</h1>
+                <p>近来天益炎热，无由染病者众。某闲暇时常挂念君，望君多保重，努力加餐饭。已逾春末，然侪辈躁动之心犹甚，某冷眼观之，颇觉悲欢世事无常，心下慨然。</p>
+                <p>每览左右兴感之由，多年少慕艾，或匿于心，或宣于口，甚者，学那相如、张生，烈火烹油，鲜花着锦，而多归于恨。人非圣贤，多贪几晌之欢，迟滞一时，弭缝不善，至于男痴女怨，难免蹉跎。况女之倾心，不可脱也，吾与汝总角之宴，历经三年又二年，至如今共挽鹿车，尘埃落定，何其有幸！</p>
+                <p>汝曾言：但求终日安稳，不求轰轰烈烈。吾深以为然，爱欲于人，有灼手烧伤之患，旁人不可知，己亦难言。吾常深陷泥沼，幸哉有汝于侧，方知那段晦暗日子仍有晴天。</p>
+                <p>吾近日交涉多有虚与委蛇之感，又患多受他人谤讥，颇觉心累。交涉之余，亦警醒自身莫效仿其人，竭吾之力维持心之穆清。嗟乎，吾唯恐有一日，明知才不可逞，而环境逼之不可不逞；明知言行不可虚饰，而环境逆之不可不虚饰。若真如此，吾何以心归空山，何以面对过去自己？吾不胜惶恐，惟愿常伴汝身，以汝之澄澈映照吾心，不至瓶坠簪折。</p>
+                <p>吾妻皎如明月，世人皆欲私藏，而吾特为尤甚。愿今后之路漫漫，吾与汝共上下求索，好风借力，造炬成阳。</p>
+                <p>祝愿无病无痛，无灾无悲。</p>
+                <p>Y</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

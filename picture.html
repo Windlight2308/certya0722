@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture</title>
+    <style>
+        /* ================= 核心排版变量 ================= */
+        :root {
+            --margin: 10vw; /* 屏幕左右两侧的绝对留白距离 */
+            
+            /* 【修改点1：房子放大】变大为12vw，提升视觉占比 */
+            --house-w: 12vw; 
+            --house-center: calc(var(--house-w) / 2); 
+            
+            /* 五折页总宽度计算：左右绝对等边距 */
+            --fold-total: calc(100vw - var(--margin) - var(--margin) - var(--house-center)); 
+            
+            /* 五折页单页边长尺寸：计算后约为14.8vw，完美大于房子的12vw，形成上下包围感 */
+            --page-s: calc(var(--fold-total) / 5); 
+        }
+
+        /* 全局样式与字体配置：思源宋体细体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+            font-weight: 300; 
+        }
+
+        /* 沉浸式全屏背景 */
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            background-image: url('assets/images/粉色底图8（大地砖）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* 左侧布局容器，严格执行左侧留白 */
+        .left-panel {
+            position: absolute;
+            left: var(--margin);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12vh; 
+            z-index: 10;
+        }
+
+        .house-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 房子图标 */
+        .house-icon {
+            width: var(--house-w); 
+            height: auto;
+            cursor: pointer;
+            z-index: 10; 
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        
+        .house-icon:hover {
+            transform: scale(1.05); 
+        }
+
+        /* 3D动画容器，折页起点在房子中轴线 */
+        .foldout-container {
+            position: absolute;
+            left: var(--house-center); 
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            perspective: 1500px; 
+            z-index: 5; 
+        }
+
+        /* 独立折页 */
+        .fold-page {
+            height: var(--page-s); 
+            width: 0; 
+            overflow: hidden; 
+            transform-style: preserve-3d;
+            transform-origin: left center;
+            transform: rotateY(-70deg); 
+            
+            /* 【修改点2：动画放慢】过渡时间延长至1.6秒，更具高级感 */
+            transition: width 1.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        transform 1.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            border-right: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .fold-page:nth-child(even) {
+            transform: rotateY(70deg);
+        }
+
+        /* 光影与颜色变化 */
+        .fold-page:nth-child(odd) {
+            background-color: #ffffff;
+            box-shadow: inset 10px 0 20px -10px rgba(0,0,0,0.05);
+        }
+        
+        .fold-page:nth-child(even) {
+            background-color: #e8e8e8; 
+            box-shadow: inset 15px 0 25px -10px rgba(0,0,0,0.15);
+        }
+
+        /* 折页内部容器 */
+        .page-content {
+            width: var(--page-s);
+            height: var(--page-s);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page-content img {
+            width: 92%;
+            height: 92%;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 展开状态的触发逻辑 */
+        .house-group.open .fold-page {
+            width: var(--page-s); 
+            transform: rotateY(0deg); 
+        }
+
+        /* 动态浮现的提示文字 */
+        .dynamic-text {
+            position: absolute;
+            left: calc(var(--house-center) + (var(--fold-total) / 2)); 
+            transform: translateX(-50%);
+            opacity: 0;
+            
+            transition: opacity 0.4s ease 0s;
+            pointer-events: none; 
+            
+            /* 【修改点3：层级修复】强制置顶，防止被折页阴影遮挡 */
+            z-index: 100;
+            
+            background-color: rgba(245, 245, 245, 0.85);
+            color: #7b7b7b;
+            font-size: 18px;
+            padding: 8px 24px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* 展开后延迟显示：配合变慢的折页动画，延迟改为1.6s */
+        .house-group.open .dynamic-text {
+            opacity: 1;
+            transition: opacity 0.5s ease 1.6s; 
+        }
+
+        /* 【修改点3：加大外扩距离】确保文字不碰到折页边缘 */
+        .red-text { top: -75px; }
+        .green-text { bottom: -75px; }
+
+        /* 左侧绿房子旁的返回键 */
+        .back-btn {
+            position: absolute;
+            left: -4.5vw; 
+            bottom: 10px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .back-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 底部居中全局提示语 */
+        .instruction-bottom {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+            background-color: rgba(245, 245, 245, 0.85);
+            color: #7b7b7b;
+            font-size: 18px;
+            padding: 8px 24px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="left-panel">
+        
+        <!-- ================= 红房子区域 ================= -->
+        <div class="house-group" id="redHouseGroup">
+            <img src="assets/images/红房子.png" alt="红房子" class="house-icon" onclick="toggleAlbum('redHouseGroup')">
+            
+            <div class="foldout-container">
+                <div class="fold-page"><div class="page-content"></div></div> 
+                <div class="fold-page"><div class="page-content"><img src="assets/images/自拍1.jpg" alt="自拍1"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/自拍2.jpg" alt="自拍2"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/自拍3.jpg" alt="自拍3"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/自拍4.jpg" alt="自拍4"></div></div>
+            </div>
+
+            <div class="dynamic-text red-text">
+                -这是我相册里你的照片-
+            </div>
+        </div>
+
+        <!-- ================= 绿房子区域 ================= -->
+        <div class="house-group" id="greenHouseGroup">
+            
+            <a href="enter.html" class="back-btn">
+                <img src="assets/images/抠图版返回键.png" alt="返回">
+            </a>
+
+            <img src="assets/images/绿房子.png" alt="绿房子" class="house-icon" onclick="toggleAlbum('greenHouseGroup')">
+            
+            <div class="foldout-container">
+                <div class="fold-page"><div class="page-content"></div></div> 
+                <div class="fold-page"><div class="page-content"><img src="assets/images/合照1.jpg" alt="合照1"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/合照2.jpg" alt="合照2"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/合照3.jpg" alt="合照3"></div></div>
+                <div class="fold-page"><div class="page-content"><img src="assets/images/合照4.jpg" alt="合照4"></div></div>
+            </div>
+
+            <div class="dynamic-text green-text">
+                -这是我相册里我们的照片-
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 底部常驻提示语 -->
+    <div class="instruction-bottom">
+        -请点击任意一个小房子-
+    </div>
+
+    <script>
+        function toggleAlbum(groupId) {
+            const group = document.getElementById(groupId);
+            group.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

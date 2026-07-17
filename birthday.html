@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday</title>
+    <style>
+        /* 清除默认边距，并设置全局字体为思源宋体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Han Serif SC', 'Source Han Serif', 'Noto Serif SC', serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            /* 【路径更新】增加 assets/ 前缀 */
+            background-image: url('assets/images/粉色底图1（波点 星星 淡粉）.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 550px; 
+        }
+
+        .envelope-link {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px; 
+            cursor: pointer;
+        }
+
+        .envelope-link img {
+            width: 90%; 
+            height: auto;
+            display: inline-block;
+        }
+
+        .instruction-text {
+            font-size: 18px;
+            color: #666; 
+            background-color: rgba(245, 245, 245, 0.85); 
+            padding: 8px 20px;
+            border-radius: 20px; 
+            letter-spacing: 1.5px;
+            /* 确保字体设置对该元素生效（继承全局） */
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px; 
+            bottom: -60px; 
+            width: 36px; 
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .back-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+        <a href="paper.html" class="envelope-link">
+            <img src="assets/images/信封素材.jpg" alt="信封">
+        </a>
+        
+        <div class="instruction-text">
+            -请点击信封-
+        </div>
+
+        <a href="enter.html" class="back-btn">
+            <img src="assets/images/抠图版返回键.png" alt="返回">
+        </a>
+    </div>
+
+</body>
+</html>
